@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sunset-orange: #E87A3E;
+  --dusty-sage: #8B9E7D;
+  --twilight-blue: #2C3E50;
+  --warm-earth: #D4A574;
+  --off-white: #F5F5F1;
+}
+
+body {
+  @apply bg-off-white text-twilight-blue;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold;
+}
