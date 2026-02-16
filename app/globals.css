@@ -10,11 +10,67 @@
   --off-white: #F5F5F1;
 }
 
+* {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-off-white text-twilight-blue;
   font-family: 'Inter', system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
   @apply font-bold;
+}
+
+/* Swiper Gallery Customization */
+.gallery-swiper {
+  padding-bottom: 50px;
+}
+
+.gallery-swiper .swiper-pagination-bullet {
+  background: var(--sunset-orange);
+  opacity: 0.5;
+  width: 12px;
+  height: 12px;
+}
+
+.gallery-swiper .swiper-pagination-bullet-active {
+  opacity: 1;
+  background: var(--sunset-orange);
+}
+
+.gallery-swiper .swiper-button-next,
+.gallery-swiper .swiper-button-prev {
+  color: var(--sunset-orange);
+}
+
+.gallery-swiper .swiper-button-next:hover,
+.gallery-swiper .swiper-button-prev:hover {
+  color: var(--warm-earth);
+}
+
+/* Smooth section transitions */
+section {
+  scroll-margin-top: 80px;
+}
+
+/* Custom scrollbar (optional) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--off-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--dusty-sage);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sunset-orange);
 }

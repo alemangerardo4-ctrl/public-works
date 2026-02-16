@@ -5,26 +5,50 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'PUBLIC WORKS — Outdoor Gear Built to Last',
-  description: 'Pop-up campers and bags made from upcycled materials. Transparent pricing, open-source designs, built for makers.',
+  description: 'Transparent pricing, open-source designs, upcycled materials. Camp shelves and adventure gear for makers.',
 }
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={inter.className}>
-        <nav className="fixed top-0 w-full bg-off-white/95 backdrop-blur-sm border-b border-twilight-blue/10 z-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center">
-            <a href="/" className="text-lg sm:text-2xl font-bold tracking-tight">
+        {/* Sticky Navigation */}
+        <nav className="fixed top-0 w-full bg-twilight-blue/95 backdrop-blur-sm z-50 border-b border-sunset-orange/20">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="/" className="text-[24px] font-bold text-white tracking-tight hover:text-sunset-orange transition">
               PUBLIC WORKS
             </a>
-            <div className="flex gap-4 sm:gap-8 text-sm sm:text-base">
-              <a href="/products" className="hover:text-sunset-orange transition font-medium">Products</a>
-              <a href="/about" className="hover:text-sunset-orange transition font-medium">About</a>
-              <a href="/cart" className="hover:text-sunset-orange transition font-medium">Cart</a>
+            <div className="flex gap-8 text-[18px]">
+              <a 
+                href="#home" 
+                className="text-white hover:text-sunset-orange transition font-medium"
+              >
+                Home
+              </a>
+              <a 
+                href="#products" 
+                className="text-white hover:text-sunset-orange transition font-medium"
+              >
+                Products
+              </a>
+              <a 
+                href="#story" 
+                className="text-white hover:text-sunset-orange transition font-medium"
+              >
+                Story
+              </a>
+              <a 
+                href="#contact" 
+                className="text-white hover:text-sunset-orange transition font-medium"
+              >
+                Contact
+              </a>
             </div>
           </div>
         </nav>
-        <main className="pt-16 sm:pt-20">
+        
+        {/* Main content - no padding needed since sections are full-screen */}
+        <main>
           {children}
         </main>
       </body>

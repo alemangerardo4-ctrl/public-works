@@ -1,61 +1,48 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
-
-// Hero background photos - rotating carousel
-const heroBackgrounds = [
-  '/images/797131f7-61b2-4a8f-a8bd-dae8e98d669e.jpg',
-  '/images/7fa69f80-3828-4f3e-bef8-95891c95174f.jpg',
-  '/images/d9e8add9-da50-459d-b0e0-1561db397a71.jpg',
-  '/images/920724cd-3248-4bad-a94f-b7903d600e58.jpg',
-]
+import { useState, useEffect, useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Pagination, Navigation } from 'swiper/modules'
+import { galleryImages } from '@/lib/galleryImages'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
 
 export default function Home() {
-  const [currentBgIndex, setCurrentBgIndex] = useState(0)
-
+  const [scrollY, setScrollY] = useState(0);
+  
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentBgIndex((prev) => (prev + 1) % heroBackgrounds.length)
-    }, 6000)
-    return () => clearInterval(interval)
-  }, [])
+    const handleScroll = () => setScrollY(window.scrollY);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-off-white">
+    <div className="min-h-screen">
       
-      {/* Hero Section with Rotating Backgrounds */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image Carousel */}
-        <div className="absolute inset-0">
-          {heroBackgrounds.map((bg, index) => (
-            <motion.div
-              key={bg}
-              initial={{ opacity: 0 }}
-              animate={{ 
-                opacity: index === currentBgIndex ? 1 : 0,
-                scale: index === currentBgIndex ? 1 : 1.05
-              }}
-              transition={{ duration: 2, ease: 'easeInOut' }}
-              className="absolute inset-0"
-            >
-              <img 
-                src={bg}
-                alt="Outdoor adventure"
-                className="w-full h-full object-cover"
-              />
-            </motion.div>
-          ))}
-          <div className="absolute inset-0 bg-gradient-to-br from-twilight-blue/85 via-twilight-blue/70 to-dusty-sage/70" />
-        </div>
-
+      {/* HERO SECTION - Full screen, centered */}
+      <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image with Parallax */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: 'url(/hero/797131f7-61b2-4a8f-a8bd-dae8e98d669e.jpg)',
+            transform: `translateY(${scrollY * 0.5}px)`,
+          }}
+        />
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-twilight-blue/40" />
+        
         {/* Hero Content */}
-        <div className="relative z-10 text-center px-6 max-w-5xl">
+        <div className="relative z-10 text-center px-6 max-w-6xl">
           <motion.h1 
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1 }}
-            className="text-6xl sm:text-8xl md:text-9xl font-black mb-8 text-off-white tracking-tight leading-none"
+            className="text-[64px] md:text-[96px] font-bold mb-6 text-white tracking-tight leading-tight"
+            style={{ fontFamily: 'Inter, sans-serif' }}
           >
             PUBLIC WORKS
           </motion.h1>
@@ -64,62 +51,116 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-xl sm:text-2xl md:text-3xl mb-12 text-off-white/95 leading-relaxed"
+            className="text-[24px] md:text-[32px] mb-12 text-white/95 leading-relaxed"
           >
-            Outdoor gear built for makers.<br/>
-            <span className="text-sunset-orange font-bold">Transparent pricing. Open-source designs.</span>
+            Outdoor Gear Built to Last
           </motion.p>
           
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <a 
-              href="/products" 
-              className="bg-sunset-orange text-off-white px-12 py-5 text-xl font-bold hover:bg-warm-earth transition-all duration-300 rounded-sm shadow-2xl hover:scale-105 active:scale-95"
+              href="#products" 
+              className="inline-block bg-sunset-orange text-white px-12 py-5 text-[20px] font-bold hover:bg-sunset-orange/90 transition-all duration-300 shadow-2xl"
             >
-              Shop Now
-            </a>
-            <a 
-              href="#about" 
-              className="border-2 border-off-white text-off-white px-12 py-5 text-xl font-bold hover:bg-off-white/10 transition-all duration-300 rounded-sm hover:scale-105 active:scale-95"
-            >
-              Learn More
+              Explore Products
             </a>
           </motion.div>
         </div>
 
-        {/* Scroll indicator */}
+        {/* Scroll Indicator */}
         <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-off-white/70 text-sm"
+          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-white/80 text-[14px]"
         >
-          ↓ Scroll
+          ↓ Scroll to explore
         </motion.div>
       </section>
 
-      {/* Product Preview with Photos */}
-      <section className="py-24 bg-off-white relative overflow-hidden">
-        {/* Background accent */}
-        <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-twilight-blue/5 to-transparent" />
+      {/* VALUES SECTION - Full screen, 3-column grid */}
+      <section className="relative min-h-screen flex items-center justify-center bg-dusty-sage/10">
+        {/* Subtle Background Image */}
+        <div 
+          className="absolute inset-0 opacity-10 bg-cover bg-center"
+          style={{ backgroundImage: 'url(/hero/7fa69f80-3828-4f3e-bef8-95891c95174f.jpg)' }}
+        />
         
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <motion.div
+        <div className="relative z-10 max-w-7xl mx-auto px-6 py-20">
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
+            className="text-[48px] md:text-[72px] font-bold mb-20 text-center text-twilight-blue"
           >
-            <h2 className="text-5xl sm:text-7xl font-black mb-16 text-center text-twilight-blue">
-              What We Make
-            </h2>
-          </motion.div>
+            Our Values
+          </motion.h2>
+
+          <div className="grid md:grid-cols-3 gap-16">
+            {/* Transparent Pricing */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="text-center"
+            >
+              <div className="text-[80px] mb-6">💰</div>
+              <h3 className="text-[32px] font-bold mb-4 text-sunset-orange">Transparent Pricing</h3>
+              <p className="text-[18px] text-twilight-blue/80 leading-relaxed">
+                No hidden markups. We break down every cost so you know exactly what you're paying for.
+              </p>
+            </motion.div>
+
+            {/* Open Source */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="text-center"
+            >
+              <div className="text-[80px] mb-6">📐</div>
+              <h3 className="text-[32px] font-bold mb-4 text-sunset-orange">Open Source</h3>
+              <p className="text-[18px] text-twilight-blue/80 leading-relaxed">
+                All designs, CAD files, and assembly guides available for free. Build it yourself or buy from us.
+              </p>
+            </motion.div>
+
+            {/* Upcycled */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-center"
+            >
+              <div className="text-[80px] mb-6">♻️</div>
+              <h3 className="text-[32px] font-bold mb-4 text-sunset-orange">Upcycled</h3>
+              <p className="text-[18px] text-twilight-blue/80 leading-relaxed">
+                Made from recycled sails, parachutes, and climbing rope. Reducing waste, one bag at a time.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* PRODUCTS SECTION - Full screen */}
+      <section id="products" className="relative min-h-screen flex items-center justify-center bg-white">
+        <div className="max-w-7xl mx-auto px-6 py-20">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-[48px] md:text-[72px] font-bold mb-16 text-center text-twilight-blue"
+          >
+            Our Products
+          </motion.h2>
 
           <div className="grid md:grid-cols-2 gap-16">
-            {/* Shelves Product */}
+            {/* Small Shelf */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -127,30 +168,32 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="group"
             >
-              <div className="aspect-[4/3] overflow-hidden rounded-sm mb-6 shadow-2xl">
+              <div className="aspect-[4/3] overflow-hidden mb-6 shadow-xl">
                 <img 
-                  src="/images/06d3ceec-01fe-4177-97ea-46780c6b3476.jpg"
-                  alt="Camping shelf in use"
+                  src="/products/06d3ceec-01fe-4177-97ea-46780c6b3476.jpg"
+                  alt="Small camping shelf"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
-              <h3 className="text-4xl font-black mb-4 text-twilight-blue group-hover:text-sunset-orange transition-colors">
-                Camp Shelves
+              <h3 className="text-[36px] font-bold mb-3 text-twilight-blue">
+                Small Shelf
               </h3>
-              <p className="text-xl text-twilight-blue/80 mb-6 leading-relaxed">
-                Flat-pack aluminum shelves. Small ($175) and Large ($275). Fits most trucks and vans.
+              <p className="text-[18px] text-twilight-blue/70 mb-4">
+                Compact aluminum shelf for organized camping. Fits most vehicles.
               </p>
-              <div className="flex gap-4">
-                <a 
-                  href="/products"
-                  className="bg-twilight-blue text-off-white px-8 py-4 text-lg font-bold hover:bg-dusty-sage transition-all duration-300 rounded-sm shadow-md hover:scale-105"
-                >
-                  Shop Shelves
-                </a>
+              <div className="flex items-baseline gap-3 mb-6">
+                <span className="text-[42px] font-bold text-sunset-orange">$175</span>
+                <span className="text-[18px] text-twilight-blue/60">flat-pack</span>
               </div>
+              <a 
+                href="/products"
+                className="inline-block bg-sunset-orange text-white px-10 py-4 text-[18px] font-bold hover:bg-sunset-orange/90 transition-all duration-300 shadow-lg"
+              >
+                Add to Cart
+              </a>
             </motion.div>
 
-            {/* Upcycled Bags */}
+            {/* Large Shelf */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -158,228 +201,165 @@ export default function Home() {
               transition={{ duration: 0.8 }}
               className="group"
             >
-              <div className="aspect-[4/3] overflow-hidden rounded-sm mb-6 shadow-2xl">
+              <div className="aspect-[4/3] overflow-hidden mb-6 shadow-xl">
                 <img 
-                  src="/images/b78328c2-fda7-4864-815e-e11c3c0facf8.jpg"
-                  alt="Upcycled gear and materials"
+                  src="/products/b78328c2-fda7-4864-815e-e11c3c0facf8.jpg"
+                  alt="Large camping shelf"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
-              <h3 className="text-4xl font-black mb-4 text-twilight-blue group-hover:text-sunset-orange transition-colors">
-                Upcycled Bags
+              <h3 className="text-[36px] font-bold mb-3 text-twilight-blue">
+                Large Shelf
               </h3>
-              <p className="text-xl text-twilight-blue/80 mb-6 leading-relaxed">
-                Recycled sailing fabric, parachutes, and climbing rope. Every piece is one-of-a-kind. Coming soon.
+              <p className="text-[18px] text-twilight-blue/70 mb-4">
+                Extended storage solution for serious adventurers. Maximum organization.
               </p>
-              <div className="flex gap-4">
-                <a 
-                  href="mailto:hello@publicworks.design"
-                  className="border-2 border-twilight-blue text-twilight-blue px-8 py-4 text-lg font-bold hover:bg-twilight-blue hover:text-off-white transition-all duration-300 rounded-sm hover:scale-105"
-                >
-                  Join Waitlist
-                </a>
+              <div className="flex items-baseline gap-3 mb-6">
+                <span className="text-[42px] font-bold text-sunset-orange">$275</span>
+                <span className="text-[18px] text-twilight-blue/60">flat-pack</span>
               </div>
+              <a 
+                href="/products"
+                className="inline-block bg-sunset-orange text-white px-10 py-4 text-[18px] font-bold hover:bg-sunset-orange/90 transition-all duration-300 shadow-lg"
+              >
+                Add to Cart
+              </a>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section id="about" className="py-24 bg-gradient-to-b from-off-white to-dusty-sage/10">
-        <div className="max-w-6xl mx-auto px-6">
+      {/* GALLERY SECTION - Full screen carousel */}
+      <section className="relative min-h-screen flex items-center justify-center bg-twilight-blue/5">
+        <div className="w-full py-20">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl sm:text-7xl font-black mb-16 text-center text-twilight-blue"
+            className="text-[48px] md:text-[72px] font-bold mb-16 text-center text-twilight-blue"
           >
-            What We Stand For
+            Built for Adventure
           </motion.h2>
 
-          <div className="grid md:grid-cols-3 gap-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="text-center group"
+          <div className="max-w-[90vw] mx-auto">
+            <Swiper
+              modules={[Autoplay, Pagination, Navigation]}
+              spaceBetween={30}
+              slidesPerView={1}
+              breakpoints={{
+                640: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 },
+              }}
+              autoplay={{
+                delay: 3000,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true,
+              }}
+              pagination={{ clickable: true }}
+              navigation
+              className="gallery-swiper"
             >
-              <div className="text-7xl mb-6 group-hover:scale-110 transition-transform">💰</div>
-              <h3 className="text-3xl font-bold mb-4 text-sunset-orange">Transparent Pricing</h3>
-              <p className="text-lg text-twilight-blue/80 leading-relaxed">
-                $175-275 camp shelves, not $500+. We show you the real cost breakdown. No hidden markup.
-              </p>
-            </motion.div>
+              {galleryImages.map((img, index) => (
+                <SwiperSlide key={index}>
+                  <div className="aspect-[4/3] overflow-hidden shadow-2xl">
+                    <img
+                      src={`/images-optimized/${img}`}
+                      alt={`Adventure ${index + 1}`}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-center group"
-            >
-              <div className="text-7xl mb-6 group-hover:scale-110 transition-transform">📐</div>
-              <h3 className="text-3xl font-bold mb-4 text-dusty-sage">Open Source</h3>
-              <p className="text-lg text-twilight-blue/80 leading-relaxed">
-                CAD files, assembly guides, repair manuals — all free. Build it yourself or buy from us.
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="text-center group"
-            >
-              <div className="text-7xl mb-6 group-hover:scale-110 transition-transform">♻️</div>
-              <h3 className="text-3xl font-bold mb-4 text-warm-earth">Upcycled Materials</h3>
-              <p className="text-lg text-twilight-blue/80 leading-relaxed">
-                Recycled sails, parachutes, climbing rope, X-Pac. Every piece is unique and has a story.
-              </p>
-            </motion.div>
+          <div className="text-center mt-12">
+            <p className="text-[18px] text-twilight-blue/70">
+              233 photos from makers around the world
+            </p>
           </div>
         </div>
       </section>
 
-      {/* Lifestyle Photo Grid Teaser */}
-      <section className="py-24 bg-off-white">
-        <div className="max-w-7xl mx-auto px-6">
+      {/* STORY SECTION - Full screen with background image */}
+      <section id="story" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: 'url(/hero/d9e8add9-da50-459d-b0e0-1561db397a71.jpg)' }}
+        />
+        
+        {/* Dark Overlay */}
+        <div className="absolute inset-0 bg-twilight-blue/70" />
+        
+        {/* Story Content */}
+        <div className="relative z-10 max-w-4xl mx-auto px-6 py-20 text-center text-white">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-[48px] md:text-[72px] font-bold mb-8"
+          >
+            How We Make
+          </motion.h2>
+          
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            transition={{ delay: 0.2 }}
+            className="text-[20px] leading-relaxed space-y-6"
           >
-            <h2 className="text-5xl sm:text-7xl font-black mb-6 text-twilight-blue">
-              Built For Adventure
-            </h2>
-            <p className="text-xl sm:text-2xl text-twilight-blue/80 max-w-3xl mx-auto">
-              Real gear. Real people. Real trails.
+            <p>
+              We're not a factory. We're a collective of makers who believe good gear 
+              should be accessible, repairable, and built to last.
+            </p>
+            <p>
+              Every shelf is hand-fabricated from aircraft-grade aluminum. Every bag is 
+              sewn from materials saved from landfills. Every design is shared freely.
+            </p>
+            <p className="text-warm-earth font-bold text-[24px]">
+              This is maker culture applied to outdoor gear.
             </p>
           </motion.div>
+        </div>
+      </section>
 
-          {/* Photo Grid Preview */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-12">
-            {[
-              '/images/02f48fd0-477b-4050-a1ef-fc6eb402281b.jpg',
-              '/images/164b784f-ef1b-481c-bbda-0d3eb54a3053.jpg',
-              '/images/53f12730-7404-46d9-86eb-1e96fa5e8793.jpg',
-              '/images/96de4ad7-58b3-4847-8cbc-7e73d1e3fe68.jpg',
-              '/images/aa521b90-9e30-4a39-a5bf-47b300d63f01.jpg',
-              '/images/b55e2bbd-bb7e-43c9-8ab0-02cc2d282e84.jpg',
-              '/images/d70c0b42-3f15-4d26-82e8-29f94c68b7b7.jpg',
-              '/images/f17a126d-cd5d-4e4f-bd54-e2cf424ee099.jpg',
-            ].map((photo, index) => (
-              <motion.div
-                key={photo}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                whileHover={{ scale: 1.05 }}
-                className="aspect-square overflow-hidden rounded-sm shadow-lg hover:shadow-2xl transition-all duration-300"
-              >
-                <img
-                  src={photo}
-                  alt={`Adventure ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </motion.div>
-            ))}
-          </div>
+      {/* CONTACT SECTION - Clean, simple */}
+      <section id="contact" className="relative min-h-screen flex items-center justify-center bg-off-white">
+        <div className="max-w-3xl mx-auto px-6 py-20 text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-[48px] md:text-[72px] font-bold mb-8 text-twilight-blue"
+          >
+            Get In Touch
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="text-[20px] text-twilight-blue/80 mb-12 leading-relaxed"
+          >
+            Questions about our products? Want to collaborate? Just want to say hi?
+          </motion.p>
 
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            className="text-center"
+            transition={{ delay: 0.4 }}
           >
             <a 
-              href="/products"
-              className="inline-block bg-twilight-blue text-off-white px-14 py-6 text-xl sm:text-2xl font-bold hover:bg-dusty-sage transition-all duration-300 rounded-sm shadow-xl hover:scale-105"
+              href="mailto:hello@publicworks.design"
+              className="inline-block bg-sunset-orange text-white px-14 py-6 text-[22px] font-bold hover:bg-sunset-orange/90 transition-all duration-300 shadow-xl"
             >
-              See All 233 Photos →
+              hello@publicworks.design
             </a>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Philosophy Section */}
-      <section className="py-24 bg-gradient-to-br from-twilight-blue to-dusty-sage text-off-white">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-5xl sm:text-7xl font-black mb-8 leading-tight">
-              The Joy of Not Being<br/>Sold Anything
-            </h2>
-            <p className="text-xl sm:text-2xl mb-12 opacity-90 leading-relaxed">
-              We're not here to convince you to buy more stuff.<br/>
-              We're here to help you build better gear, repair what you have,<br/>
-              and get outside more often.
-            </p>
-            <div className="grid md:grid-cols-3 gap-8 text-left">
-              <div className="bg-off-white/10 backdrop-blur-sm p-8 rounded-sm">
-                <h3 className="text-2xl font-bold mb-3 text-sunset-orange">Repair Over Replace</h3>
-                <p className="text-off-white/90">
-                  Free repair guides. Spare parts at cost. Keep your gear running forever.
-                </p>
-              </div>
-              <div className="bg-off-white/10 backdrop-blur-sm p-8 rounded-sm">
-                <h3 className="text-2xl font-bold mb-3 text-warm-earth">DIY Over Buy</h3>
-                <p className="text-off-white/90">
-                  Open-source CAD files. Step-by-step tutorials. Build it yourself.
-                </p>
-              </div>
-              <div className="bg-off-white/10 backdrop-blur-sm p-8 rounded-sm">
-                <h3 className="text-2xl font-bold mb-3 text-dusty-sage">Quality Over Quantity</h3>
-                <p className="text-off-white/90">
-                  One good shelf beats ten cheap ones. Built to last a lifetime.
-                </p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-32 bg-sunset-orange text-off-white text-center relative overflow-hidden">
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: 'repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.1) 35px, rgba(255,255,255,.1) 70px)',
-          }} />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-6 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-5xl sm:text-7xl font-black mb-8 leading-tight">
-              Join the Maker<br/>Movement
-            </h2>
-            <p className="text-2xl mb-12 opacity-95 leading-relaxed">
-              Build your gear. Hit the trail. Share your knowledge.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <a 
-                href="/products"
-                className="inline-block bg-twilight-blue text-off-white px-14 py-6 text-2xl font-bold hover:bg-dusty-sage transition-all duration-300 rounded-sm shadow-2xl hover:scale-105"
-              >
-                Shop Now
-              </a>
-              <a 
-                href="mailto:hello@publicworks.design"
-                className="inline-block border-3 border-off-white text-off-white px-14 py-6 text-2xl font-bold hover:bg-off-white/10 transition-all duration-300 rounded-sm hover:scale-105"
-              >
-                Get In Touch
-              </a>
-            </div>
           </motion.div>
         </div>
       </section>
