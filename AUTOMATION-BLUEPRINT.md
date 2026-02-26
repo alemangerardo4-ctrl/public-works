@@ -80,26 +80,26 @@ Think of this like giving Winston (automation) permission to:
 # Copy token → save to .env as GITHUB_TOKEN
 ```
 
-**Paste this in your `.`.env** (alongside existing tokens):
+**Paste this in your `.env` file** (alongside existing tokens):
 ```
-GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+GITHUB_TOKEN=[your-github-token-here]
 ```
 
 ### Step 2: Verify All 4 Tokens in `.env`
 
-```bash
-cat <<'EOF' > ~/.openclaw/workspace/.env
+All 4 tokens should be in your `.env` file:
 
-# Figma (already set)
-FIGMA_API_KEY=figd_oMaJXp_7tHb58RFZ2PAub9B-YIqLCrAQqFZ7KdiS
+```
+# Figma
+FIGMA_API_KEY=[your-figma-key]
 FIGMA_FILE_KEY=rSYVMRPNm0yPTS4dhusfuY
 
-# GitHub (NEW)
-GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# GitHub
+GITHUB_TOKEN=[your-github-token]
 
-# Vercel (already set)
-VERCEL_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-VERCEL_ORG_ID=xxxxxxxxxxxxx
+# Vercel
+VERCEL_TOKEN=[your-vercel-token]
+VERCEL_ORG_ID=[your-vercel-org-id]
 
 # Shopify (existing)
 SHOPIFY_STOREFRONT_TOKEN=shpss_xxxxxxxxxxxxxxxxxxxxx
