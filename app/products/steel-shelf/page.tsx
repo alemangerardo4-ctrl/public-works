@@ -19,6 +19,7 @@ export default function SteelShelf() {
     '/products/shelf-1-detail-1.jpeg',
     '/products/shelf-1-detail-2.jpeg',
     '/products/shelf-1-dimensions.jpeg',
+    '/products/shelf-1-sketch.png',
   ]
 
   const [currentImage, setCurrentImage] = useState(0)
@@ -69,7 +70,7 @@ export default function SteelShelf() {
               </motion.div>
               
               {/* Thumbnail Grid */}
-              <div className="grid grid-cols-4 gap-3">
+              <div className="grid grid-cols-5 gap-3">
                 {productImages.map((img, idx) => (
                   <button
                     key={idx}

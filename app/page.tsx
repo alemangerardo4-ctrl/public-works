@@ -204,22 +204,53 @@ export default function Home() {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900/50">
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="text-center space-y-6 mb-16">
-            <h2 className="text-5xl md:text-6xl font-black text-white">Coming Soon</h2>
-            <p className="text-lg text-slate-300">First collection launching March 2026</p>
+            <h2 className="text-5xl md:text-6xl font-black text-white">Shop Now</h2>
+            <p className="text-lg text-slate-300">First collection — available today</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { name: 'Canvas Tote Bag', price: '$89', emoji: '👜', desc: 'Timeless, durable, versatile' },
-              { name: 'Trek Backpack', price: '$249', emoji: '🎒', desc: 'Adventure-ready companion' },
-              { name: 'Steel Water Bottle', price: '$45', emoji: '💧', desc: '48-hour temperature control' }
+              { 
+                name: 'Minimalist Floating Shelf', 
+                price: '$175', 
+                image: '/products/shelf-1-main.jpeg',
+                desc: 'Precision-cut aluminum. Set of 3.',
+                link: '/products/steel-shelf',
+                badge: 'Made to Order'
+              },
+              { 
+                name: 'Frame Tote', 
+                price: '$89', 
+                image: '/products/frame-tote-hero.jpg',
+                desc: 'Internal frame. Lifetime warranty.',
+                link: '/products/frame-tote',
+                badge: 'Launch Price'
+              },
+              { 
+                name: 'Pop-Up Truck Camper Kit', 
+                price: '$2,499', 
+                image: '/products/camper-lifestyle-mountain.png',
+                desc: 'DIY engineering. Open-source CAD.',
+                link: '/products/popup-camper',
+                badge: 'Pre-Order'
+              }
             ].map((product, i) => (
-              <div
+              <Link
                 key={i}
-                className="group relative overflow-hidden rounded-2xl border border-slate-700 hover:border-green-500/50 transition-all duration-300"
+                href={product.link}
+                className="group relative overflow-hidden rounded-2xl border border-slate-700 hover:border-green-500/50 transition-all duration-300 cursor-pointer"
               >
-                <div className="aspect-square bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center overflow-hidden relative">
-                  <div className="text-7xl group-hover:scale-125 transition-transform duration-300">{product.emoji}</div>
+                <div className="aspect-square bg-gradient-to-br from-slate-800 to-slate-900 overflow-hidden relative">
+                  <img 
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-4 right-4">
+                    <span className="px-3 py-1 bg-green-500/90 backdrop-blur-sm text-white text-xs font-bold rounded-full">
+                      {product.badge}
+                    </span>
+                  </div>
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
                 <div className="p-6 bg-slate-900 space-y-3">
@@ -227,11 +258,23 @@ export default function Home() {
                   <p className="text-slate-400 text-sm">{product.desc}</p>
                   <div className="flex justify-between items-center">
                     <p className="text-2xl font-black text-green-400">{product.price}</p>
-                    <span className="px-3 py-1 bg-slate-800 text-cyan-400 text-xs rounded-full">Pre-order</span>
+                    <span className="text-cyan-400 text-sm font-semibold group-hover:translate-x-1 transition-transform">View →</span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/shop"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-green-500 to-blue-600 text-white font-bold rounded-lg hover:shadow-2xl hover:shadow-green-500/50 transition-all transform hover:scale-105"
+            >
+              Shop All Products
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <path d="M5 10h10M13 7l3 3-3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
