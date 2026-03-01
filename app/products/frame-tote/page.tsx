@@ -14,21 +14,19 @@ export default function FrameTote() {
   ]
 
   const productImages = [
-    '/products/frame-tote-hero.jpg',
-    '/products/frame-tote-lifestyle-1.jpg',
-    '/products/frame-tote-detail-1.jpg',
-    '/products/frame-tote-lifestyle-2.jpg',
-    '/products/frame-tote-detail-2.jpg',
-    '/products/frame-tote-lifestyle-3.jpg',
-    '/products/frame-tote-product.webp',
+    '/products/tote-hero.jpeg',
+    '/products/tote-product.jpeg',
+    '/products/tote-lifestyle.jpeg',
+    '/products/tote-detail.jpeg',
+    '/products/tote-render.webp',
   ]
 
   const [currentImage, setCurrentImage] = useState(0)
 
   const features = [
-    { icon: '🎒', title: 'Frame Support', desc: 'Internal aluminum frame distributes weight' },
-    { icon: '♻️', title: 'Sustainable Canvas', desc: 'Organic cotton & recycled materials' },
-    { icon: '💧', title: 'Water Resistant', desc: 'Waxed canvas finish, built for the elements' },
+    { icon: '🎒', title: 'Frame Support', desc: 'Internal frame distributes weight' },
+    { icon: '♻️', title: 'Recycled Materials', desc: 'Sustainable canvas & recycled components' },
+    { icon: '💧', title: 'Water Resistant', desc: 'Waxed finish, built for the elements' },
     { icon: '🔧', title: 'Modular Design', desc: 'Attach carabiners, clips, accessories' },
   ]
 
@@ -42,7 +40,7 @@ export default function FrameTote() {
               Public Works
             </a>
             <div className="flex gap-6">
-              <a href="/products" className="text-slate-300 hover:text-white transition">
+              <a href="/shop" className="text-slate-300 hover:text-white transition">
                 All Products
               </a>
             </div>
@@ -65,13 +63,13 @@ export default function FrameTote() {
               >
                 <img 
                   src={productImages[currentImage]}
-                  alt="Frame Tote Bag"
+                  alt="Recycled Tote Frame Bag"
                   className="w-full h-full object-cover"
                 />
               </motion.div>
               
               {/* Thumbnail Grid */}
-              <div className="grid grid-cols-7 gap-2">
+              <div className="grid grid-cols-5 gap-2">
                 {productImages.map((img, idx) => (
                   <button
                     key={idx}
@@ -97,13 +95,14 @@ export default function FrameTote() {
               {/* Title & Price */}
               <div className="space-y-4">
                 <div className="inline-block px-3 py-1 bg-green-500/20 border border-green-500/50 rounded-full text-green-400 text-sm font-mono">
-                  Adventure Ready • Lifetime Warranty
+                  Sustainable • Lifetime Warranty
                 </div>
                 <h1 className="text-5xl md:text-6xl font-black text-white">
-                  Frame Tote
+                  Recycled Tote Frame Bag
                 </h1>
                 <p className="text-xl text-slate-300">
-                  Internal frame construction for load distribution. Sustainable canvas, modular attachments, built for daily use and weekend adventures.
+                  Internal frame construction for load distribution. Sustainable recycled materials, 
+                  modular attachments, built for daily use and weekend adventures.
                 </p>
                 <div className="flex items-baseline gap-3">
                   <p className="text-4xl font-black text-green-400">$89</p>
@@ -188,7 +187,7 @@ export default function FrameTote() {
                 <h3 className="text-white font-bold">Launch Pricing</h3>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-slate-300">
-                    <span>Material & Manufacturing</span>
+                    <span>Recycled Materials & Manufacturing</span>
                     <span>$48</span>
                   </div>
                   <div className="flex justify-between text-slate-300">
@@ -217,15 +216,14 @@ export default function FrameTote() {
               <h2 className="text-4xl font-black text-white">Built for Adventure</h2>
               <div className="text-lg text-slate-300 space-y-4 leading-relaxed">
                 <p>
-                  The Frame Tote isn't just another bag — it's a load-bearing system disguised as 
-                  everyday carry. An internal aluminum frame distributes weight across your shoulders 
-                  and back, making heavy loads feel manageable whether you're hauling tools, groceries, 
-                  or camping gear.
+                  The Recycled Tote Frame Bag isn't just another bag — it's a load-bearing system 
+                  made from sustainable materials. An internal aluminum frame distributes weight 
+                  across your shoulders and back, making heavy loads feel manageable.
                 </p>
                 <p>
-                  Waxed organic cotton canvas sheds water and dirt. Reinforced stitching at stress 
-                  points. Modular webbing loops for carabiners, pouches, and accessories. This is the 
-                  bag you'll still be using 20 years from now.
+                  Waxed recycled canvas sheds water and dirt. Reinforced stitching at stress points. 
+                  Modular webbing loops for carabiners, pouches, and accessories. This is the bag 
+                  you'll still be using 20 years from now.
                 </p>
                 <p>
                   <strong>Lifetime warranty.</strong> If it breaks, we fix it or replace it. No questions asked.
@@ -250,7 +248,7 @@ export default function FrameTote() {
                 <div className="p-6 bg-slate-900/50 rounded-lg border border-slate-700">
                   <h4 className="text-white font-bold mb-3">Materials</h4>
                   <ul className="space-y-2 text-slate-300 text-sm">
-                    <li>• Organic cotton canvas (waxed)</li>
+                    <li>• Recycled canvas (waxed)</li>
                     <li>• Recycled polyester liner</li>
                     <li>• 6061 aluminum frame</li>
                     <li>• YKK zippers</li>
@@ -258,20 +256,6 @@ export default function FrameTote() {
                   </ul>
                 </div>
               </div>
-            </div>
-
-            {/* Lifestyle Images */}
-            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-              <img 
-                src="/products/frame-tote-lifestyle-1.jpg"
-                alt="Frame Tote in use"
-                className="w-full rounded-lg border border-slate-700"
-              />
-              <img 
-                src="/products/frame-tote-lifestyle-3.jpg"
-                alt="Frame Tote adventure"
-                className="w-full rounded-lg border border-slate-700"
-              />
             </div>
           </div>
         </div>

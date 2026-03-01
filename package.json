@@ -19,5 +19,10 @@
     "shopify-buy": "^3.0.7",
     "swiper": "^12.1.1",
     "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@types/node": "25.3.2",
+    "@types/react": "19.2.14",
+    "typescript": "5.9.3"
   }
 }

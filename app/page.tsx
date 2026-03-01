@@ -211,25 +211,25 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { 
-                name: 'Minimalist Floating Shelf', 
-                price: '$175', 
-                image: '/products/shelf-1-main.jpeg',
-                desc: 'Precision-cut aluminum. Set of 3.',
+                name: '44" × 9" Stainless Steel Shelf', 
+                price: '$245', 
+                image: '/products/shelf-hero.jpeg',
+                desc: 'Precision-cut stainless. Set of 3.',
                 link: '/products/steel-shelf',
                 badge: 'Made to Order'
               },
               { 
-                name: 'Frame Tote', 
+                name: 'Recycled Tote Frame Bag', 
                 price: '$89', 
-                image: '/products/frame-tote-hero.jpg',
-                desc: 'Internal frame. Lifetime warranty.',
+                image: '/products/tote-hero.jpeg',
+                desc: 'Internal frame. Recycled materials.',
                 link: '/products/frame-tote',
                 badge: 'Launch Price'
               },
               { 
-                name: 'Pop-Up Truck Camper Kit', 
+                name: 'Truck Pop-up Camper', 
                 price: '$2,499', 
-                image: '/products/camper-lifestyle-mountain.png',
+                image: '/products/camper-lifestyle.png',
                 desc: 'DIY engineering. Open-source CAD.',
                 link: '/products/popup-camper',
                 badge: 'Pre-Order'

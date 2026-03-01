@@ -23,10 +23,10 @@ export default function PopupCamper() {
   ]
 
   const productImages = [
-    '/products/camper-lifestyle-mountain.png',
-    '/products/camper-cad-render.jpg',
-    '/products/camper-extrusion-parts.jpg',
-    '/products/camper-build-progress.jpg',
+    '/products/camper-exterior.jpg',
+    '/products/camper-interior.jpeg',
+    '/products/camper-lifestyle.png',
+    '/products/camper-detail.jpeg',
   ]
 
   const [currentImage, setCurrentImage] = useState(0)
@@ -50,7 +50,7 @@ export default function PopupCamper() {
               Public Works
             </a>
             <div className="flex gap-6">
-              <a href="/products" className="text-slate-300 hover:text-white transition">
+              <a href="/shop" className="text-slate-300 hover:text-white transition">
                 All Products
               </a>
             </div>
@@ -73,7 +73,7 @@ export default function PopupCamper() {
               >
                 <img 
                   src={productImages[currentImage]}
-                  alt="DIY Truck Pop-Up Camper"
+                  alt="Truck Pop-up Camper"
                   className="w-full h-full object-cover"
                 />
               </motion.div>
@@ -108,7 +108,7 @@ export default function PopupCamper() {
                   DIY Kit • Made to Order
                 </div>
                 <h1 className="text-5xl md:text-6xl font-black text-white">
-                  Pop-Up Truck Camper Kit
+                  Truck Pop-up Camper
                 </h1>
                 <p className="text-xl text-slate-300">
                   Ultra-lightweight aluminum extrusion frame. DIY engineering gets you on the road 
@@ -280,49 +280,6 @@ export default function PopupCamper() {
                   </ul>
                 </div>
               </div>
-            </div>
-
-            {/* Build Process Preview */}
-            <div className="max-w-6xl mx-auto">
-              <h3 className="text-2xl font-bold text-white mb-6">What's Included</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-6 bg-gradient-to-br from-green-500/10 to-blue-500/10 rounded-lg border border-green-500/30">
-                  <h4 className="text-white font-bold mb-3 text-lg">📦 Complete DIY Kit</h4>
-                  <ul className="space-y-2 text-slate-300 text-sm">
-                    <li>✓ Pre-cut aluminum extrusion frame</li>
-                    <li>✓ Gas strut lift system (installed)</li>
-                    <li>✓ Weatherproof canvas shell</li>
-                    <li>✓ All connectors & hardware</li>
-                    <li>✓ Detailed assembly guide (PDF + video)</li>
-                    <li>✓ CAD files (STEP, Fusion 360)</li>
-                    <li>✓ Community Discord access</li>
-                  </ul>
-                </div>
-                <div className="p-6 bg-slate-900/50 rounded-lg border border-slate-700">
-                  <h4 className="text-white font-bold mb-3 text-lg">🔧 You'll Need</h4>
-                  <ul className="space-y-2 text-slate-300 text-sm">
-                    <li>• Basic hand tools (wrench set, Allen keys)</li>
-                    <li>• 4-6 hours assembly time</li>
-                    <li>• Drill (for bed mounting)</li>
-                    <li>• 1-2 people recommended</li>
-                    <li>• A 6ft pickup truck bed</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-
-            {/* Image Grid */}
-            <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-              <img 
-                src="/products/camper-extrusion-parts.jpg"
-                alt="Aluminum extrusion parts"
-                className="w-full rounded-lg border border-slate-700"
-              />
-              <img 
-                src="/products/camper-build-progress.jpg"
-                alt="Build in progress"
-                className="w-full rounded-lg border border-slate-700"
-              />
             </div>
 
             {/* Pre-Order Notice */}

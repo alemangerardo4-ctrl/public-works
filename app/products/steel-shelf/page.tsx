@@ -2,31 +2,29 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import Image from 'next/image'
 
 export default function SteelShelf() {
   const [selectedFinish, setSelectedFinish] = useState('raw')
   const [quantity, setQuantity] = useState(1)
   
   const finishes = [
-    { id: 'raw', name: 'Raw Aluminum', price: 175 },
-    { id: 'black-matte', name: 'Matte Black', price: 175 },
-    { id: 'black-gloss', name: 'Gloss Black', price: 175 },
+    { id: 'raw', name: 'Raw Stainless', price: 245 },
+    { id: 'black-matte', name: 'Matte Black', price: 245 },
+    { id: 'black-gloss', name: 'Gloss Black', price: 245 },
   ]
 
   const productImages = [
-    '/products/shelf-1-main.jpeg',
-    '/products/shelf-1-detail-1.jpeg',
-    '/products/shelf-1-detail-2.jpeg',
-    '/products/shelf-1-dimensions.jpeg',
-    '/products/shelf-1-sketch.png',
+    '/products/shelf-hero.jpeg',
+    '/products/shelf-detail-1.jpeg',
+    '/products/shelf-detail-2.jpeg',
+    '/products/shelf-cad.png',
   ]
 
   const [currentImage, setCurrentImage] = useState(0)
 
   const features = [
-    { icon: '📐', title: 'Precision Cut', desc: '30" × 7" aluminum shelves' },
-    { icon: '💪', title: '35lb Capacity', desc: 'Per shelf, engineered to last' },
+    { icon: '📐', title: 'Precision Cut', desc: '44" × 9" stainless steel' },
+    { icon: '💪', title: '50lb Capacity', desc: 'Industrial strength per shelf' },
     { icon: '🏭', title: 'Made to Order', desc: 'Ships in 5-7 days' },
     { icon: '⚙️', title: 'Includes Hardware', desc: 'Everything needed to mount' },
   ]
@@ -41,7 +39,7 @@ export default function SteelShelf() {
               Public Works
             </a>
             <div className="flex gap-6">
-              <a href="/products" className="text-slate-300 hover:text-white transition">
+              <a href="/shop" className="text-slate-300 hover:text-white transition">
                 All Products
               </a>
             </div>
@@ -64,13 +62,13 @@ export default function SteelShelf() {
               >
                 <img 
                   src={productImages[currentImage]}
-                  alt="Minimalist Steel Shelf"
+                  alt="44 inch Stainless Steel Shelf"
                   className="w-full h-full object-cover"
                 />
               </motion.div>
               
               {/* Thumbnail Grid */}
-              <div className="grid grid-cols-5 gap-3">
+              <div className="grid grid-cols-4 gap-3">
                 {productImages.map((img, idx) => (
                   <button
                     key={idx}
@@ -96,13 +94,13 @@ export default function SteelShelf() {
               {/* Title & Price */}
               <div className="space-y-4">
                 <div className="inline-block px-3 py-1 bg-green-500/20 border border-green-500/50 rounded-full text-green-400 text-sm font-mono">
-                  Shelf 1 • Made to Order
+                  Made to Order
                 </div>
                 <h1 className="text-5xl md:text-6xl font-black text-white">
-                  Minimalist Floating Shelf
+                  44" × 9" Stainless Steel Shelf
                 </h1>
                 <p className="text-xl text-slate-300">
-                  Precision-cut steel. 30" × 7", 35lb capacity per shelf. Set of 3 with mounting hardware.
+                  Precision-cut stainless steel. 44" × 9", 50lb capacity per shelf. Set of 3 with mounting hardware.
                 </p>
                 <div className="flex items-baseline gap-3">
                   <p className="text-4xl font-black text-green-400">
@@ -162,7 +160,7 @@ export default function SteelShelf() {
               {/* Add to Cart */}
               <div className="space-y-3">
                 <button className="w-full py-4 bg-gradient-to-r from-green-500 to-blue-600 text-white font-bold text-lg rounded-lg hover:shadow-2xl hover:shadow-green-500/50 transition-all transform hover:scale-105">
-                  Add to Cart — ${(finishes.find(f => f.id === selectedFinish)?.price || 175) * quantity}
+                  Add to Cart — ${(finishes.find(f => f.id === selectedFinish)?.price || 245) * quantity}
                 </button>
                 <p className="text-slate-400 text-sm text-center">
                   Ships in 5-7 days • Free shipping over $200
@@ -186,19 +184,19 @@ export default function SteelShelf() {
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between text-slate-300">
                     <span>Material Cost</span>
-                    <span>$112</span>
+                    <span>$165</span>
                   </div>
                   <div className="flex justify-between text-slate-300">
-                    <span>Coating & Finishing</span>
-                    <span>$24</span>
+                    <span>Fabrication & Finishing</span>
+                    <span>$35</span>
                   </div>
                   <div className="flex justify-between text-slate-300">
                     <span>Our Margin</span>
-                    <span>$39</span>
+                    <span>$45</span>
                   </div>
                   <div className="flex justify-between text-green-400 font-bold text-base pt-2 border-t border-slate-700">
                     <span>Total</span>
-                    <span>$175</span>
+                    <span>$245</span>
                   </div>
                 </div>
               </div>
@@ -211,13 +209,13 @@ export default function SteelShelf() {
               <h2 className="text-4xl font-black text-white">About This Product</h2>
               <div className="text-lg text-slate-300 space-y-4 leading-relaxed">
                 <p>
-                  Our minimalist floating shelves are precision-cut from marine-grade 5052 aluminum. 
-                  Each set includes three shelves, mounting hardware, and detailed installation instructions.
+                  Larger format, industrial strength. These 44" × 9" stainless steel shelves are 
+                  precision-cut for perfect dimensional accuracy. Each set includes three shelves, 
+                  mounting hardware, and detailed installation instructions.
                 </p>
                 <p>
-                  Built for longevity. These aren't mass-produced — each shelf is made to order using 
-                  CNC fabrication for perfect dimensional accuracy. No warping, no sag, just clean lines 
-                  and industrial strength.
+                  Built for longevity. Stainless steel construction means corrosion resistance and 
+                  strength that won't warp or sag. Each shelf can handle 50lb loads with ease.
                 </p>
               </div>
             </div>
@@ -229,17 +227,17 @@ export default function SteelShelf() {
                 <div className="p-6 bg-slate-900/50 rounded-lg border border-slate-700">
                   <h4 className="text-white font-bold mb-3">Dimensions</h4>
                   <ul className="space-y-2 text-slate-300 text-sm">
-                    <li>• Length: 30" (762mm)</li>
-                    <li>• Depth: 7" (178mm)</li>
+                    <li>• Length: 44" (112cm)</li>
+                    <li>• Depth: 9" (23cm)</li>
                     <li>• Thickness: 1/8" (3.2mm)</li>
-                    <li>• Weight: 1.8kg per shelf</li>
+                    <li>• Weight: 2.5kg per shelf</li>
                   </ul>
                 </div>
                 <div className="p-6 bg-slate-900/50 rounded-lg border border-slate-700">
                   <h4 className="text-white font-bold mb-3">Material</h4>
                   <ul className="space-y-2 text-slate-300 text-sm">
-                    <li>• Marine-grade 5052 aluminum</li>
-                    <li>• Load capacity: 35lb per shelf</li>
+                    <li>• 304 stainless steel</li>
+                    <li>• Load capacity: 50lb per shelf</li>
                     <li>• Powder coat finish options</li>
                     <li>• Corrosion resistant</li>
                   </ul>
@@ -247,12 +245,13 @@ export default function SteelShelf() {
               </div>
             </div>
 
-            {/* Dimensions Image */}
+            {/* CAD Pattern */}
             <div className="max-w-4xl mx-auto">
+              <h3 className="text-2xl font-bold text-white mb-4">Flat Pattern (CAD)</h3>
               <img 
-                src="/products/shelf-1-sketch.png"
-                alt="Shelf Dimensions"
-                className="w-full rounded-lg border border-slate-700"
+                src="/products/shelf-cad.png"
+                alt="Shelf Flat Pattern"
+                className="w-full rounded-lg border border-slate-700 bg-white p-6"
               />
             </div>
           </div>
